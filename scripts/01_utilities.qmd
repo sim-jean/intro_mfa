@@ -10,19 +10,18 @@ Commencez par set-up un **environnement**
 
 ```{r env-setup}
 
-if(!('renv' %in% installed.packages())){
-  install.packages('renv')
-  renv::init()
-}else{
-  renv::activate()
-}
+#if(!('renv' %in% installed.packages())){
+#  install.packages('renv')
+#  renv::init()
+#}else{
+#  renv::activate()
+#}
 
-
+renv::restore()
 
 ```
 
-
-Vous commencez par runner l'architecture : 
+Vous commencez par runner l'architecture :
 
 ```{r, echo=T}
 
@@ -41,8 +40,7 @@ print(paste(here("scripts"), " est créé"))
 
 ```
 
-Puis : 
-
+Puis :
 
 ```{r}
 if(!dir.exists(here("data"))){ # Vérifie si le chemin existe déja
@@ -62,13 +60,9 @@ print("Architecture à jour")
 
 ```
 
-
 ## Set up de l'environnement
 
-
 ```{r}
-
-
 
 packages_to_install = c("rmarkdown", "knitr", "tidyverse", "readxl", "magrittr", "stringr", "stringdist", 'reshape2',
                         "factoextra", "FactoMineR", "sf", "sp", "here", "openxlsx", 'RColorBrewer','eurostat',

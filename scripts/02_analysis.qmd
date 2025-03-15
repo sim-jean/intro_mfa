@@ -82,7 +82,8 @@ if(!(file.exists(here("data","external", "mfa_data.csv")))){
   # Si les données ne sont pas sauvegardées, on les 
   # acquiert et les sauvegarde
   
-  mfa_data <- get_eurostat("env_ac_mfa",  # Utilise la fonction get_eurostat qui nécessite le code du jeu de donnée
+  mfa_data <- get_eurostat(#########,  
+    # Utilise la fonction get_eurostat qui nécessite le code du jeu de donnée
                          time_format = "num")
   
   mfa_data_labeled = label_eurostat(mfa_data) # Récupère les labels de variables
@@ -99,7 +100,7 @@ if(!(file.exists(here("data","external", "mfa_data.csv")))){
 # Même mécanisme pour les données de PIB
 
 if(!(file.exists(here("data","external", "gdp_data_filtered.csv")))){
-  gdp_data <- get_eurostat("nama_10_gdp", 
+  gdp_data <- get_eurostat(##########,  
                         time_format = "num")
 
   gdp_data_filtered = gdp_data %>%
@@ -285,7 +286,7 @@ category_list <- list(
 
  
 1. Répartissez vous en groupe de deux
-2. Ecrivez une fonction pour représenter les indicateurs clés de l'analyse MFA comme chez Magalhaes (ou dans le MFA): Domestic extraction, Direct material inputs, domestic consumption, imports and exports
+2. Ecrivez une fonction pour représenter les indicateurs clés de l'analyse MFA: Domestic extraction, Direct material inputs, domestic consumption, imports and exports
 3. Choisissez un pays dans l'UE et sortez son profil métabollique dans les dernières années
 
 
@@ -319,10 +320,11 @@ visualizer = function(country, variable, data_ = mfa_data_labeled){
 #' visualizer("France", "Domestic extraction")
 
   p = data_%>%
-    subset(geo == country)%>%              # On choisit les pays
-    subset(unit == "Tonnes per capita")%>% # On garde les tonnes par tête
-    subset(indic_env == variable)%>%       # Choisit la variable 
-    subset(material %in% summary_classes)%>% # Récupère les données agrégées
+    ##########################             # On choisit les pays avec subset ou filter()
+    ##########################             # On garde les tonnes par tête
+    ##########################             # Choisit la variable 
+    ##########################             # Récupère les données agrégées par 
+                                           # classe de matériaux
     ggplot(aes(x=TIME_PERIOD, y=values, fill = material, color = material))+
     geom_area()+ # Fait un plot stacked 
     scale_fill_manual(values = palette_mfa)+
@@ -398,6 +400,8 @@ visualizer("France", "Exports")
 ## D. Comparaison des profils pays dans le temps
 ### 1. Par indicateurs
 
+1. Complétez la fonction de visualisation
+
 ```{r, echo = T}
 countries_to_compare = c('France', 'Spain', 'Germany', 'Estonia', 'Italy', 'Greece','Finland')
 
@@ -424,10 +428,10 @@ comparison_visualiser = function(countries = countries_to_compare,
 #'                       indic_env_ = "Domestic extraction",
 #'                       unit_ = "Tonnes per capita")  
   p = mfa_data_labeled %>%
-    subset(geo %in% countries_to_compare) %>%   # Filtrer les données pour ne garder que les pays sélectionnés
-    subset(indic_env == indic_env_) %>%           # Conserver uniquement l'indicateur environnemental spécifié
-    subset(unit == unit_) %>%                     # Garder les données dans l'unité de mesure indiquée
-    subset(material %in% summary_classes) %>%     # Filtrer pour ne conserver que les matériaux agrégés définis dans summary_classes
+      # Filtrer les données pour ne garder que les pays sélectionnés
+      # Conserver uniquement l'indicateur environnemental spécifié
+      # Garder les données dans l'unité de mesure indiquée
+      # Filtrer pour ne conserver que les matériaux agrégés définis dans summary_classes
     group_by(geo, TIME_PERIOD) %>%                # Grouper par pays et par période
     mutate(overall = sum(values, na.rm = TRUE)) %>% # Calculer la somme des valeurs par groupe (agrégation)
     ungroup() %>%                                 # Dégroupement
@@ -499,7 +503,7 @@ $$ \frac{PIB}{DMI}$$
 #| fig-height: 6
 
 
-countries_to_compare = c('France', 'Spain', 'Germany', 'Estonia', 'Italy', 'Greece','Finland')
+countries_to_compare = c()#############################)
 palette_countries = palette.colors(length(countries_to_compare))
 
 # Filtrer et agréger les données pour obtenir le total des Direct Material Inputs (DMI)
@@ -514,7 +518,6 @@ efficiency_data = mfa_data_labeled %>%
   # Filtrer pour garder uniquement les données dont l'unité est "Thousand tonnes"
   subset(unit == 'Thousand tonnes') %>%
   # Conserver uniquement les matériaux inclus dans summary_classes
-  subset(material %in% summary_classes) %>%
   # Regrouper les données par pays et par période (année)
   group_by(geo, TIME_PERIOD) %>%
   # Calculer la somme des valeurs pour chaque groupe, ce qui donne le total des DMI
@@ -528,18 +531,22 @@ efficiency_data = mfa_data_labeled %>%
 ```
 
 
+-----
+
+Rédigez le code pour visualiser les données
+
+
 ```{r}
 
 efficiency_data %>%
-  ggplot(aes(x = TIME_PERIOD, y = overall, color = geo))+
-  geom_line(linewidth=1)+
+  # Déclarer l'environnement ggplot
+  # Tracer une courbe
   scale_color_manual(values = unname(palette_countries))+
   custom_theme()+
   ylab('DMI in thousand tonnes')+
   xlab(" ")+
   labs(color=NULL)
 ```
-
 
 ```{r}
 
@@ -633,6 +640,8 @@ performance = function(indic_env_, indicator, countries = countries_to_compare){
 
 ### Illustration
 
+Utilisez la fonction `performance` pour plotter l'efficacit
+
 ```{r}
 performance("Domestic material consumption", "Efficiency (million €/thousand tonne)")
 ```
@@ -687,13 +696,15 @@ growth_dmi = mfa_data_labeled %>%
 
 ```
 
+Ecrivez le code pour calculer le taux de variation du PIB : 
+
 
 ```{r, echo = T}
 growth_gdp = gdp_data_labeled%>%
-  subset(geo %in% countries_to_compare)%>%            # Pays que l'on souhaite conserver
-  group_by(geo) %>%                                   # Grouping by geo (or another grouping variable)
-  arrange(TIME_PERIOD) %>%                            # Ensure the data is in time order
-  mutate(GDP = (values / lag(values) - 1) * 100) %>% # Compute growth rate in percent
+             # Pays que l'on souhaite conserver
+             # Grouping by geo (or another grouping variable)
+             # Ensure the data is in time order
+             # Compute growth rate in percent
   ungroup()%>%
   distinct()
 ```
