@@ -1,6 +1,7 @@
 ## Introduction au Material Flow Analysis
 
-Ce module est présenté dans le cadre de *l'UC6 - Economie Ecologique* du diplôme de deuxième année d'ingénieur d'AgroParisTech. Plus précisément, ce module pratique vient illustrer et concrétiser le [cours relatif] au **métabolisme social**, assuré par [Simon Jean](https://sim-jean.github.io/)
+Ce module est présenté dans le cadre de *l'UC6 - Economie Ecologique* du [diplôme de deuxième année d'ingénieur d'AgroParisTech](https://sim-jean.github.io/teaching/agro/2A/). Plus précisément, ce module pratique vient illustrer et concrétiser le cours relatif
+au **métabolisme social**, assuré par [Simon Jean](https://sim-jean.github.io/)
 
 Dans le cadre de ce module, vous apprendrez à:
 
