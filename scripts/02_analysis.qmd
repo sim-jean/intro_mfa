@@ -4,7 +4,6 @@ format: html
 editor: visual
 ---
 
-
 ```{r setup, include=FALSE}
 rm(list=ls())
 
@@ -24,8 +23,9 @@ load_package <- function(pkg) {
 
 sapply(packages_, load_package)
 
-font_add_google("Roboto", "roboto")
-local_family= "Roboto Light"
+font_add_google("Roboto", "Roboto")
+local_family= "Roboto"
+showtext_auto()
 palette_mfa = c('Biomass' = "forestgreen",
                 'Metal ores (gross ores)' = 'grey',
                 'Non-metallic minerals' = 'darkgoldenrod1',
@@ -57,22 +57,17 @@ custom_theme <- function(font_size = 10,
 
 ## A. Objectifs de l'Atelier
 
-- Accéder et préparer les données Eurostat sur les flux de matières
-- Calculer les indicateurs métaboliques clés
-- Visualiser et comparer les profils métaboliques
-- Analyser les tendances et les schémas
-- Simuler des interventions politiques de base
+-   Accéder et préparer les données Eurostat sur les flux de matières
+-   Calculer les indicateurs métaboliques clés
+-   Visualiser et comparer les profils métaboliques
+-   Analyser les tendances et les schémas
+-   Simuler des interventions politiques de base
 
- 
 ### 1. Acquisition
- 
 
-- On accède à Eurostat grâce au package `eurostat`
-  - Trouvez le code du jeu de données pour les données MFA et les données de PIB sur le site web
-  - Complétez le code en dessous
-  
-
- 
+-   On accède à Eurostat grâce au package `eurostat`
+    -   Trouvez le code du jeu de données pour les données MFA et les données de PIB sur le site web
+    -   Complétez le code en dessous
 
 ```{r get-data, echo = T}
  
@@ -125,9 +120,6 @@ if(!(file.exists(here("data","external", "gdp_data_filtered.csv")))){
 
 
 ```
-
- 
-
 
 ```{r}
 
@@ -232,9 +224,6 @@ category_list <- list(
 
 ```
 
-
-
-
 #### Biomass
 
 ```{r}
@@ -280,15 +269,11 @@ category_list <- list(
 
 ```
 
- 
-
 ## C. Visualisation des indicateurs par pays
 
- 
-1. Répartissez vous en groupe de deux
-2. Ecrivez une fonction pour représenter les indicateurs clés de l'analyse MFA: Domestic extraction, Direct material inputs, domestic consumption, imports and exports
-3. Choisissez un pays dans l'UE et sortez son profil métabollique dans les dernières années
-
+1.  Répartissez vous en groupe de deux
+2.  Ecrivez une fonction pour représenter les indicateurs clés de l'analyse MFA: Domestic extraction, Direct material inputs, domestic consumption, imports and exports
+3.  Choisissez un pays dans l'UE et sortez son profil métabollique dans les dernières années
 
 ### Code
 
@@ -341,6 +326,7 @@ visualizer = function(country, variable, data_ = mfa_data_labeled){
 
 
 ```
+
 ### DE
 
 ```{r}
@@ -348,10 +334,6 @@ visualizer = function(country, variable, data_ = mfa_data_labeled){
 visualizer("France", "Domestic extraction")
 
 ```
-
-
-
- 
 
 ### DMI
 
@@ -362,9 +344,6 @@ visualizer("France", "Direct material inputs")
 
 ```
 
- 
-
-
 ### DMC
 
 ```{r}
@@ -374,7 +353,6 @@ visualizer("France", "Domestic material consumption")
 
 ```
 
-
 ### Imports
 
 ```{r}
@@ -383,7 +361,6 @@ visualizer("France", "Domestic material consumption")
 visualizer("France", "Imports")
 
 ```
-
 
 ### Exports
 
@@ -395,12 +372,11 @@ visualizer("France", "Exports")
 
 ```
 
-
-
 ## D. Comparaison des profils pays dans le temps
+
 ### 1. Par indicateurs
 
-1. Complétez la fonction de visualisation
+1.  Complétez la fonction de visualisation
 
 ```{r, echo = T}
 countries_to_compare = c('France', 'Spain', 'Germany', 'Estonia', 'Italy', 'Greece','Finland')
@@ -452,30 +428,23 @@ comparison_visualiser = function(countries = countries_to_compare,
 
 ```
 
- 
-
 ```{r}
 #| fig-align: "center"
 
 comparison_visualiser(indic_env_ = "Domestic extraction", unit_ = "Tonnes per capita")
 ```
 
-
- 
-
 ```{r}
 #| fig-align: "center"
 
 comparison_visualiser(indic_env_ = "Direct material inputs", unit_ = "Tonnes per capita")
 ```
- 
 
 ```{r}
 #| fig-align: "center"
 
 comparison_visualiser(indic_env_ = "Domestic material consumption", unit_ = "Tonnes per capita")
 ```
- 
 
 ```{r}
 #| fig-align: "center"
@@ -485,17 +454,13 @@ comparison_visualiser(indic_env_ = "Physical trade balance", unit = "Tonnes per 
 
 ```
 
-
 ### 2. Productivité des ressources
 
 $$ \frac{PIB}{DMI}$$
 
-  
-1. Choisissez un échantillon de pays utile à comparer en Europe
-2. Calculez leurs productivités des ressources 
-3. Montrez leur évolution dans le temps
-
- 
+1.  Choisissez un échantillon de pays utile à comparer en Europe
+2.  Calculez leurs productivités des ressources
+3.  Montrez leur évolution dans le temps
 
 ```{r material-efficiency, echo = T}
 #| out-width: "100%"
@@ -530,11 +495,9 @@ efficiency_data = mfa_data_labeled %>%
 
 ```
 
-
------
+------------------------------------------------------------------------
 
 Rédigez le code pour visualiser les données
-
 
 ```{r}
 
@@ -574,15 +537,12 @@ productivity_data %>%
 
 ```
 
-
-
 ### 3. Efficacité matérielle
 
 $$\frac{PIB}{DMC}$$
 
-1. En utilisant les mêmes techniques, calculez l'efficacité matérielle
-2. Quelle est la différence entre les deux mesures?
-
+1.  En utilisant les mêmes techniques, calculez l'efficacité matérielle
+2.  Quelle est la différence entre les deux mesures?
 
 ### Code
 
@@ -646,36 +606,28 @@ Utilisez la fonction `performance` pour plotter l'efficacit
 performance("Domestic material consumption", "Efficiency (million €/thousand tonne)")
 ```
 
- 
 ### Différence entre les deux mesures
 
 **Productivité matérielle (Resource Productivity ou RP):**
 
-  
-- Quantité de valeur économique (PIB) générée par unité de matière entrante dans l'économie (DMI).
-- capacité à créer de la valeur à partir des matières qui entrent dans le système économique.
-- capacité à créer de la valeur à partir des matières qui entrent dans le système économique.
-- indicateur d'efficience économique orienté vers la production.
-
-
+-   Quantité de valeur économique (PIB) générée par unité de matière entrante dans l'économie (DMI).
+-   capacité à créer de la valeur à partir des matières qui entrent dans le système économique.
+-   capacité à créer de la valeur à partir des matières qui entrent dans le système économique.
+-   indicateur d'efficience économique orienté vers la production.
 
 **Efficacité matérielle (Material Efficiency ou ME):**
-  
-- quantité de valeur économique (PIB) générée par unité de matière effectivement consommée par l'économie (DMC).
-- focalise sur l'utilisation interne des matières pour créer de la valeur.
-- exclut les matières qui sont simplement réexportées
-- indicateur d'efficience écologique orienté vers la consommation.
 
+-   quantité de valeur économique (PIB) générée par unité de matière effectivement consommée par l'économie (DMC).
+-   focalise sur l'utilisation interne des matières pour créer de la valeur.
+-   exclut les matières qui sont simplement réexportées
+-   indicateur d'efficience écologique orienté vers la consommation.
 
 *Peuvent diverger significativement pour les économies qui jouent un rôle important dans le commerce international de matières premières ou semi-transformées*
 
-
 ### 4. Découplages matériaux ?
 
-  
-1. Calculez les taux de croissance des indicateurs : PIB et métaboliques
-2. Tracez graphiquement leur évolutions
-
+1.  Calculez les taux de croissance des indicateurs : PIB et métaboliques
+2.  Tracez graphiquement leur évolutions
 
 ```{r, echo = T}
 growth_dmi = mfa_data_labeled %>%
@@ -696,8 +648,7 @@ growth_dmi = mfa_data_labeled %>%
 
 ```
 
-Ecrivez le code pour calculer le taux de variation du PIB : 
-
+Ecrivez le code pour calculer le taux de variation du PIB :
 
 ```{r, echo = T}
 growth_gdp = gdp_data_labeled%>%
@@ -708,7 +659,6 @@ growth_gdp = gdp_data_labeled%>%
   ungroup()%>%
   distinct()
 ```
-
 
 ```{r}
 full_join(growth_gdp, growth_dmi, by = c('TIME_PERIOD', 'geo'))%>%
@@ -730,29 +680,27 @@ full_join(growth_gdp, growth_dmi, by = c('TIME_PERIOD', 'geo'))%>%
 
 ```
 
-### 5. Evolutions des demandes de matériaux liés à la transition 
+### 5. Evolutions des demandes de matériaux liés à la transition
 
-- Cuivre : 
-  - Essentiel pour les infrastructures électriques (câblage, moteurs, transformateurs) et les réseaux intelligents.
-  - Forte demande mondiale due à l’électrification et aux énergies renouvelables, entraînant des risques de tensions d’approvisionnement.
-  - La concentration géographique de certaines réserves peut accentuer la vulnérabilité aux perturbations géopolitiques.
+Lisez l'article de [O. Vidal et al. , *Nature Geosciences*, 2013](https://www.researchgate.net/publication/258514690_Metals_for_a_low-carbon_society)
 
-- Nickel : 
-  - Batteries lithium-ion, cruciales pour le stockage d’énergie et les véhicules électriques.
-- Or, argent, platine et métaux précieux : 
-  - Electronique de pointe
-  - Rareté et la concentration des mines dans certains pays posent des risques d’approvisionnement et de volatilité des prix.
-- Bauxite et autre Aluminium :
-  - Transformation de la bauxite en aluminium 
-  - Légèreté et résistance: matériau de choix pour l’automobile, l’aéronautique et les infrastructures renouvelables.
-
-- Uranium  Thorium
-  - Sources de combustible pour la production d’énergie nucléaire, offrant une solution bas carbone pour la transition énergétique.
-  - Disponibilité de thorium pourrait offrir des alternatives: nécessite encore des développements technologiques et réglementaires.
-
-- Autres métaux non ferreux : 
-  - Divers éléments critiques utilisés dans la fabrication de composants électroniques, batteries, et technologies renouvelables.
-
+-   Cuivre :
+    -   Essentiel pour les infrastructures électriques (câblage, moteurs, transformateurs) et les réseaux intelligents.
+    -   Forte demande mondiale due à l’électrification et aux énergies renouvelables, entraînant des risques de tensions d’approvisionnement.
+    -   La concentration géographique de certaines réserves peut accentuer la vulnérabilité aux perturbations géopolitiques.
+-   Nickel :
+    -   Batteries lithium-ion, cruciales pour le stockage d’énergie et les véhicules électriques.
+-   Or, argent, platine et métaux précieux :
+    -   Electronique de pointe
+    -   Rareté et la concentration des mines dans certains pays posent des risques d’approvisionnement et de volatilité des prix.
+-   Bauxite et autre Aluminium :
+    -   Transformation de la bauxite en aluminium
+    -   Légèreté et résistance: matériau de choix pour l’automobile, l’aéronautique et les infrastructures renouvelables.
+-   Uranium Thorium
+    -   Sources de combustible pour la production d’énergie nucléaire, offrant une solution bas carbone pour la transition énergétique.
+    -   Disponibilité de thorium pourrait offrir des alternatives: nécessite encore des développements technologiques et réglementaires.
+-   Autres métaux non ferreux :
+    -   Divers éléments critiques utilisés dans la fabrication de composants électroniques, batteries, et technologies renouvelables.
 
 ```{r}
 mfa_data_labeled%>%
@@ -775,7 +723,6 @@ mfa_data_labeled%>%
 
 
 ```
-
 
 ```{r}
 mfa_data_labeled %>%
@@ -806,4 +753,3 @@ mfa_data_labeled %>%
 
 
 ```
-

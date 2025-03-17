@@ -1,7 +1,6 @@
 ## Introduction au Material Flow Analysis
 
-Ce module est présenté dans le cadre de *l'UC6 - Economie Ecologique* du [diplôme de deuxième année d'ingénieur d'AgroParisTech](https://sim-jean.github.io/teaching/agro/2A/). Plus précisément, ce module pratique vient illustrer et concrétiser le cours relatif
-au **métabolisme social**, assuré par [Simon Jean](https://sim-jean.github.io/)
+Ce module est présenté dans le cadre de *l'UC6 - Economie Ecologique* du [diplôme de deuxième année d'ingénieur d'AgroParisTech](https://sim-jean.github.io/teaching/agro/2A/). Plus précisément, ce module pratique vient illustrer et concrétiser le cours relatif au **métabolisme social**, assuré par [Simon Jean](https://sim-jean.github.io/)
 
 Dans le cadre de ce module, vous apprendrez à:
 
@@ -9,7 +8,7 @@ Dans le cadre de ce module, vous apprendrez à:
 
 2\. Calculer les variables clés de l'analyse MFA
 
-3. Visualiser des séries de moyen terme
+3.  Visualiser des séries de moyen terme
 
 4\. Opérer une analyse initiale du phénomène de découplage
 
