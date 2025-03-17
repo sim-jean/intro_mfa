@@ -1,6 +1,6 @@
 ---
-title: "Analyse du Métabolisme Social"
-subtitle: "Analyse des Flux de Matières avec les Données Eurostat"
+title: "Workshop d'analyse du Métabolisme Social"
+subtitle: "UC6 - Economie Ecologique"
 ---
 
 ```{r setup, include=FALSE}
@@ -22,8 +22,9 @@ load_package <- function(pkg) {
 
 sapply(packages_, load_package)
 
-font_add_google("Roboto", "roboto")
-local_family= "Roboto Light"
+font_add_google("Roboto", "Roboto")
+showtext_auto()
+local_family= "Roboto"
 palette_mfa = c('Biomass' = "forestgreen",
                 'Metal ores (gross ores)' = 'grey',
                 'Non-metallic minerals' = 'darkgoldenrod1',
@@ -56,12 +57,11 @@ custom_theme <- function(font_size = 10,
 ## A. Objectifs de l'Atelier
 
 ::: incremental
--   Comprendre les principes de reproducibilité de l'analyse
--   Accéder et préparer les données Eurostat sur les flux de matières
--   Calculer les indicateurs métaboliques clés
+-   Comprendre les principes de [reproducibilité]{.bg3} de l'analyse
+-   Accéder et préparer les [données Eurostat]{.bg3} sur les flux de matières
+-   Calculer les [indicateurs métaboliques]{.bg3} clés
 -   Visualiser et comparer les profils métaboliques
 -   Analyser les tendances et les schémas
--   Simuler des interventions politiques de base
 :::
 
 ## B. Workflow et données
@@ -70,10 +70,10 @@ custom_theme <- function(font_size = 10,
 
 ::: incremental
 -   Ils permettent de :
-    -   Regrouper tout le code au sein d'une [architecture reproductible]{.bg} i.e. claire & commune
-    -   Créer des [environnements]{.bg} afin d'avoir un code *reproductible*, gérant les dépendances entre projets et dans le temps
+    -   Regrouper tout le code au sein d'une [architecture reproductible]{.bg4} i.e. claire & commune
+    -   Créer des [environnements]{.bg4} afin d'avoir un code *reproductible*, gérant les dépendances entre projets et dans le temps
     -   Partager rapidement et facilement le code entre différents utilisateurs
-    -   Suivre dans le temps via le [contrôle de version]{.bg}, notamment en utilisant Git (ce sera pour une autre fois)
+    -   Suivre dans le temps via le [contrôle de version]{.bg4}, notamment en utilisant Git (ce sera pour une autre fois)
 :::
 
 ------------------------------------------------------------------------
@@ -81,11 +81,11 @@ custom_theme <- function(font_size = 10,
 ### 2. Reproducibilité
 
 ::: incremental
--   On parle de [reproducibilité]{.bg} à plusieurs niveaux dans l'analyse scientifique :
-    -   Reproducibilité [computationelle]{.bg2} : pouvoir répliquer exactement les résultats
-    -   Reproducibilité [empirique]{.bg2} : refaire les tests d'une autre manière
-    -   Reproducibilité [conceptuelle]{.bg2} : retrouver les mêmes résultats avec de nouvelles données
--   Celle ci est en [crise]{.bg} : beaucoup de résultats en science ne sont pas réplicables
+-   On parle de [reproducibilité]{.bg4} à plusieurs niveaux dans l'analyse scientifique :
+    -   Reproducibilité [computationelle]{.bg3} : pouvoir répliquer exactement les résultats
+    -   Reproducibilité [empirique]{.bg3} : refaire les tests d'une autre manière
+    -   Reproducibilité [conceptuelle]{.bg3} : retrouver les mêmes résultats avec de nouvelles données
+-   Celle ci est en [crise]{.bg4} : beaucoup de résultats en science ne sont pas réplicables
 -   Pas simplement la recherche académique, toute production visant à être étayée et partagée doit viser la reproducibilité
 :::
 
@@ -94,14 +94,14 @@ custom_theme <- function(font_size = 10,
 ### 3. Comment rendre la recherche reproductible?
 
 ::: incremental
-1.  Une [architecture]{.bg} claire et organisée par [projets]{.bg}:
+1.  Une [architecture]{.bg4} claire et organisée par [projets]{.bg4}:
     -   Des fichiers séparés pour les données brutes, traitées et les scripts
-2.  [Contrôle de version]{.bg} : on ne verra pas ça ensemble
-3.  Management des [dépendances]{.bg} :
+2.  [Contrôle de version]{.bg4} : on ne verra pas ça ensemble
+3.  Management des [dépendances]{.bg4} :
     -   Créer des environnements pour vérouiller les bibliothèques
     -   Documenter toutes les dépendances
     -   Partager les fichiers `.lock` avec les collaborateurs
-4.  [Pipeline]{.bg} de données :
+4.  [Pipeline]{.bg4} de données :
     -   Ne jamais modifier les fichiers de données brutes
     -   Créer des scripts séparés pour le nettoyage et l'analyse
     -   Construire des fonctions modulaires et réutilisables - c'est un art
@@ -111,11 +111,11 @@ custom_theme <- function(font_size = 10,
 ------------------------------------------------------------------------
 
 ::: incremental
-5.  [Documentation]{.bg} :
+5.  [Documentation]{.bg4} :
     -   Maintenez des `README` clairs et exhaustifs
     -   Commentez le code
     -   Générez des rapports automatisés avec les fichiers `markdown` (`.md`, `.rmd` ou `.qmd` - quarto markdown)
-6.  [Automatisation]{.bg} :
+6.  [Automatisation]{.bg4} :
     -   Utilisez des chemins relatifs : le package `here()`
     -   Créez des rapports reproductibles
 :::
@@ -124,19 +124,20 @@ custom_theme <- function(font_size = 10,
 
 ### 4. Architecture
 
-Le but est d'avoir une [architecture]{.bg} claire, pour que vos résultats puissent être reproduits, avec :
+Le but est d'avoir une [architecture]{.bg4} claire, pour que vos résultats puissent être reproduits, avec :
 
 ::: incremental
--   Les [scripts]{.bg} : c'est le texte, le code qui sera exécuté
--   Les [données]{.bg} : brutes ou nettoyées, ou additionelles de sources extérieures
--   Les [résultats]{.bg}: figures, tableaux etc
--   La [documentation]{.bg} : les rapports, ou encore un fichier qui s'appelle le `Readme.md`, qui détaille le projet, les instructions d'utilisation etc.
+-   Les [scripts]{.bg4} : c'est le texte, le code qui sera exécuté
+-   Les [données]{.bg4} : brutes ou nettoyées, ou additionelles de sources extérieures
+-   Les [résultats]{.bg4}: figures, tableaux etc
+-   La [documentation]{.bg4} : les rapports, ou encore un fichier qui s'appelle le `Readme.md`, qui détaille le projet, les instructions d'utilisation etc.
 :::
 
 ------------------------------------------------------------------------
 
 ::: incremental
 -   Pour commencer, vous allez aller sur la page Github du cours ! `https://github.com/sim-jean/intro_mfa`
+-   Lisez le fichier `README.md`
 -   Téléchargez le fichier `.zip` du projet et décompressez le
 -   Ouvrez le fichier `.proj`
 -   Puis ouvrez le fichier `script > 01_utilities.qmd` et suivez les instructions relatives à l'environnement et à l'architecture
@@ -205,7 +206,7 @@ print("Architecture à jour")
 ### 5. Environnement
 
 ::: incremental
--   Clé pour rendre le travail [reproductible]{.bg} :
+-   Clé pour rendre le travail [reproductible]{.bg4} :
     -   Les versions des packages sont stockées
     -   Quand l'environnement est partagé, tout le monde travail avec les mêmes packages, permettant la reproducibilité entre personnes et dans le temps
 -   Chaque projet peut avoir des versions de package différentes sans encombre
@@ -215,7 +216,7 @@ print("Architecture à jour")
 
 ### 6. Packages et environnements
 
-Ensuite, on va télécharger et installer des [packages]{.bg} utiles :
+Ensuite, on va télécharger et installer des [packages]{.bg4} utiles :
 
 ::: incremental
 -   Le package `rmarkdown` et `knitr` pour effectivement avoir des documents en markdown qui soient pris en compte par R
@@ -223,7 +224,7 @@ Ensuite, on va télécharger et installer des [packages]{.bg} utiles :
     -   `tidyr` et `dplyr` : sont essentiels pour la manipulation de données de base ainsi que le recodage, la création de nouvelles variables, le filtrage etc
     -   `gpplot2` et `ggsci`: le package de référence pour la data visualisation et des `themes()` (styles) de référence dans la littérature scientifique
 -   `readxl` : pour lire des données en format `.xlsx`
--   `magrittr`: un package qui permet d'utiliser l'opérateur [pipe]{.bg} `%>%`, qui permet de connecter les opérations entre elles, simplifiant le processus de $g(h(x))$ à `x %>% h() %>% g()`
+-   `magrittr`: un package qui permet d'utiliser l'opérateur [pipe]{.bg4} `%>%`, qui permet de connecter les opérations entre elles, simplifiant le processus de $g(h(x))$ à `x %>% h() %>% g()`
 -   `eurostat` : pour accéder directement aux données d'Eurostat
 -   `countrycode`: pas sur d'en avoir besoin mais permet d'avoir les bons noms de pays
 -   `here`: permet d'utiliser des chemins relatifs plutôt qu'absolus (i.e. `~/scripts/utilities.qmd` plutôt que `C:/Users/jean/OneDrive/Desktop/Teaching/AgroParisTech/intro_mfa/scripts/01_utilities.qmd`)
@@ -233,10 +234,13 @@ Ensuite, on va télécharger et installer des [packages]{.bg} utiles :
 
 ::: incremental
 -   On utilise maintenant le script `02_analysis.qmd`
--   On accède à Eurostat grâce au package `eurostat`
+-   On accède à [Eurostat]{.bg4} grâce au package `eurostat`
     -   Trouvez le code du jeu de données pour les données MFA et les données de PIB sur le site web
     -   Complétez le code en dessous
+    
 :::
+
+-----
 
 ::: fragment
 ```{r get-data, echo = T}
@@ -290,6 +294,8 @@ if(!(file.exists(here("data","external", "gdp_data_filtered.csv")))){
 
 ```
 :::
+
+----
 
 ```{r}
 
@@ -445,7 +451,7 @@ category_list <- list(
 
 ::: incremental
 1.  Répartissez vous en groupe de deux
-2.  Ecrivez une fonction pour représenter les indicateurs clés de l'analyse MFA comme chez Magalhaes (ou dans le MFA): Domestic extraction, Direct material inputs, domestic consumption, imports and exports
+2.  Ecrivez une fonction pour représenter les indicateurs clés de l'analyse MFA: Domestic extraction, Direct material inputs, domestic consumption, imports and exports
 3.  Choisissez un pays dans l'UE et sortez son profil métabollique dans les dernières années
 :::
 
@@ -568,6 +574,7 @@ visualizer("France", "Exports")
 1.  Complétez la fonction de visualisation
 
 ::: fragment
+
 ```{r, echo = T}
 countries_to_compare = c('France', 'Spain', 'Germany', 'Estonia', 'Italy', 'Greece','Finland')
 
@@ -682,8 +689,10 @@ palette_countries = palette.colors(length(countries_to_compare))
 ```
 :::
 
+-----
+
 ::: fragment
-```{r material-efficiency, echo = T}
+```{r, echo = T}
 #| out-width: "100%"
 #| fig-width: 10
 #| fig-height: 6
@@ -716,7 +725,7 @@ Rédigez le code pour visualiser les données
 
 ::: fragment
 ```{r}
-
+#| fig-align: "center"
 efficiency_data %>%
   ggplot(aes(x = TIME_PERIOD, y = overall, color = geo))+
   geom_line(linewidth=1)+
@@ -830,6 +839,7 @@ Utilisez la fonction `performance` pour plotter l'efficacit
 
 ::: fragment
 ```{r}
+#| fig-align: "center"
 performance("Domestic material consumption", "Efficiency (million €/thousand tonne)")
 ```
 :::
@@ -841,24 +851,23 @@ performance("Domestic material consumption", "Efficiency (million €/thousand t
 
 ::::::: columns
 :::: column
-Productivité matérielle (Resource Productivity ou RP):
+[Productivité matérielle ]{.bg4}(Resource Productivity ou RP):
 
 ::: incremental
 -   Quantité de valeur économique (PIB) générée par unité de matière entrante dans l'économie (DMI).
--   capacité à créer de la valeur à partir des matières qui entrent dans le système économique.
--   capacité à créer de la valeur à partir des matières qui entrent dans le système économique.
--   indicateur d'efficience économique orienté vers la production.
+-   capacité à créer de la valeur à partir des [matières qui entrent dans le système économique]{.bg3}.
+-   indicateur d'efficience économique orienté vers la [production.]{.bg3}
 :::
 ::::
 
 :::: column
-Efficacité matérielle (Material Efficiency ou ME):
+[Efficacité matérielle]{.bg4} (Material Efficiency ou ME):
 
 ::: incremental
 -   quantité de valeur économique (PIB) générée par unité de matière effectivement consommée par l'économie (DMC).
--   focalise sur l'utilisation interne des matières pour créer de la valeur.
+-   focalise sur [l'utilisation interne des matières]{.bg3} pour créer de la valeur.
 -   exclut les matières qui sont simplement réexportées
--   indicateur d'efficience écologique orienté vers la consommation.
+-   indicateur d'efficience écologique [orienté vers la consommation.]{.bg3}
 :::
 ::::
 
@@ -873,6 +882,8 @@ Efficacité matérielle (Material Efficiency ou ME):
 1.  Calculez les taux de croissance des indicateurs : PIB et métaboliques
 2.  Tracez graphiquement leur évolutions
 :::
+
+::: fragment
 
 ```{r, echo = T}
 growth_dmi = mfa_data_labeled %>%
@@ -892,6 +903,8 @@ growth_dmi = mfa_data_labeled %>%
   subset(DMI != 0)                                    # Filtrer pour supprimer les observations où le taux de croissance est nul
 
 ```
+
+:::
 
 ------------------------------------------------------------------------
 
@@ -935,23 +948,31 @@ full_join(growth_gdp, growth_dmi, by = c('TIME_PERIOD', 'geo'))%>%
 
 ### 5. Evolutions des demandes de matériaux liés à la transition
 
+Lisez l'article de [O. Vidal et al. , *Nature Geosciences*, 2013](https://www.researchgate.net/publication/258514690_Metals_for_a_low-carbon_society)
+
 ::: incremental
--   Cuivre :
+-   [Cuivre]{.bg3} :
     -   Essentiel pour les infrastructures électriques (câblage, moteurs, transformateurs) et les réseaux intelligents.
     -   Forte demande mondiale due à l’électrification et aux énergies renouvelables, entraînant des risques de tensions d’approvisionnement.
     -   La concentration géographique de certaines réserves peut accentuer la vulnérabilité aux perturbations géopolitiques.
--   Nickel :
+-   [Nickel]{.bg3} :
     -   Batteries lithium-ion, cruciales pour le stockage d’énergie et les véhicules électriques.
--   Or, argent, platine et métaux précieux :
+-   [Or, argent, platine et métaux précieux]{.bg3} :
     -   Electronique de pointe
     -   Rareté et la concentration des mines dans certains pays posent des risques d’approvisionnement et de volatilité des prix.
--   Bauxite et autre Aluminium :
+
+:::    
+
+----
+    
+::: incremental  
+-   [Bauxite et autre Aluminium]{.bg3} :
     -   Transformation de la bauxite en aluminium
     -   Légèreté et résistance: matériau de choix pour l’automobile, l’aéronautique et les infrastructures renouvelables.
--   Uranium Thorium
+-   [Uranium Thorium]{.bg3}
     -   Sources de combustible pour la production d’énergie nucléaire, offrant une solution bas carbone pour la transition énergétique.
     -   Disponibilité de thorium pourrait offrir des alternatives: nécessite encore des développements technologiques et réglementaires.
--   Autres métaux non ferreux :
+-   [Autres métaux non ferreux]{.bg3} :
     -   Divers éléments critiques utilisés dans la fabrication de composants électroniques, batteries, et technologies renouvelables.
 :::
 
