@@ -963,9 +963,6 @@ Lisez l'article de [O. Vidal et al. , *Nature Geosciences*, 2013](https://www.re
 
 :::    
 
-<<<<<<< HEAD:scripts/essai1.qmd
-
-=======
 ----
     
 ::: incremental  
@@ -978,9 +975,30 @@ Lisez l'article de [O. Vidal et al. , *Nature Geosciences*, 2013](https://www.re
 -   [Autres métaux non ferreux]{.bg3} :
     -   Divers éléments critiques utilisés dans la fabrication de composants électroniques, batteries, et technologies renouvelables.
 :::
->>>>>>> 611c9a213395430a40a88504e1b188eef422eb10:scripts/Presentation.qmd
+
+
+----
+
+
+![[Rapport de l'IEA, 2020](https://www.iea.org/reports/the-role-of-critical-minerals-in-clean-energy-transitions)](../images/minerals_clean_energy.png){fig-align="center" width="50%"}
+
+![](../images/legend.jpg){fig-align="center" width="80%"}
+
+-------------
+
+![[Rapport de l'IEA, 2020](https://www.iea.org/reports/the-role-of-critical-minerals-in-clean-energy-transitions)](../images/minerals_ev.png){fig-align="center" width="50%"}
+
+![](../images/legend.jpg){fig-align="center" width="80%"}
+
+-------------
+
+
+![[Rapport de l'IEA, 2020](https://www.iea.org/reports/the-role-of-critical-minerals-in-clean-energy-transitions)](../images/clean_energy_minerals.png){fig-align="center" width="50%"}
+
 
 ------------------------------------------------------------------------
+
+
 
 ```{r}
 mfa_data_labeled%>%
