@@ -62,7 +62,10 @@ custom_theme <- function(font_size = 10,
 -   Calculer les [indicateurs métaboliques]{.bg3} clés
 -   Visualiser et comparer les profils métaboliques
 -   Analyser les tendances et les schémas
+
 :::
+
+[Allez sur la page du projet : `https://github.com/sim-jean/intro_mfa`]{.fragment}
 
 ## B. Workflow et données
 

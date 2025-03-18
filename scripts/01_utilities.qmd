@@ -6,7 +6,7 @@ editor: visual
 
 ## Set up de l'architecture
 
-Commencez par set-up un **environnement**
+- Commencez par set-up un **environnement** en restaurant celui que j'ai créé pour vous : 
 
 ```{r env-setup}
 
@@ -19,7 +19,7 @@ renv::restore()
 
 ```
 
-Vous commencez par runner l'architecture :
+- Construire l'architecture :
 
 ```{r, echo=T}
 
